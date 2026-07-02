@@ -9,7 +9,6 @@ import {
 export class LanguageInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler) {
     const req = context.switchToHttp().getRequest();
-    console.log('LanguageInterceptor - Incoming request headers:', req.headers);
     const langHeader =
       req.headers['x-language'] || req.headers['accept-language'];
 

@@ -72,7 +72,6 @@ export class UserService {
    */
   async create(data: CreateUserDto): Promise<User> {
     await this.validateEmailUniqueness(data.email);
-    console.log('Creating user with data:', data);
     return this.prisma.user.create({
       data: {
         ...data,
@@ -108,7 +107,6 @@ export class UserService {
   }
 
   async getUserMe(req: Request) {
-    console.log('Getting user from request:', req['user']);
     const userId = req['user']?.['userId'];
     if (!userId) {
       throw new AppError(USER_ERROR_CODES.USER_NOT_FOUND);

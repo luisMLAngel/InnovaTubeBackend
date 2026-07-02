@@ -42,7 +42,6 @@ async function bootstrap() {
   //   next();
   // });
 
-  console.log('Applying GlobalExceptionFilter');
   app.useGlobalFilters(new GlobalExceptionFilter());
 
   await app.listen(envs.PORT, '0.0.0.0');

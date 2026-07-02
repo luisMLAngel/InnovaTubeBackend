@@ -27,9 +27,25 @@ export class FavoriteService {
     });
   }
 
-  async removeFavorite(userId: string, videoId: string) {
+  async removeFavorite(userId: string, youtubeVideoId: string) {
+    const video = await this.prisma.video.findUnique({
+      where: { youtubeVideoId },
+    });
+
+    if (!video) {
+      return null;
+    }
+
+    const favorite = await this.prisma.favorite.findUnique({
+      where: { userId_videoId: { userId, videoId: video.id } },
+    });
+
+    if (!favorite) {
+      return null;
+    }
+
     return this.prisma.favorite.delete({
-      where: { userId_videoId: { userId, videoId } },
+      where: { userId_videoId: { userId, videoId: video.id } },
     });
   }
 
@@ -41,7 +57,7 @@ export class FavoriteService {
       where: {
         userId,
         ...(search && {
-          video: {
+          Video: {
             title: {
               contains: search,
               mode: 'insensitive',

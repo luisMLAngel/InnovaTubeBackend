@@ -85,15 +85,12 @@ export class AuthService {
     res: Response,
     data: CreateAuthUserDto,
   ): Promise<{ accessToken: string; refreshToken: string; user: User }> {
-    console.log('REGISTRANDO USUARIO', data);
     const { firstName, lastName, email, password } = data;
     await this.validateEmailUniqueness(data.email);
     const passwordHash = await this.bcryptService.hash(password);
-    console.log('contraseña hasheada', passwordHash);
     const user = await this.prisma.user.create({
       data: { firstName, lastName, email, passwordHash },
     });
-    console.log('USUARIO CREADO', user);
     const accessToken = await this.tokenService.generateAccessToken(
       user.id,
       user.email,
