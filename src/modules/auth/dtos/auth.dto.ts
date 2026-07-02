@@ -50,3 +50,26 @@ export class CreateAuthUserDto {
   })
   password: string;
 }
+
+export class RequestForgotPasswordDto {
+  @IsEmail()
+  email: string;
+}
+
+export class RequestResetPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  token: string;
+
+  @IsString()
+  @MinLength(8)
+  @MaxLength(100)
+  @IsStrongPassword({
+    minLength: 8,
+    minLowercase: 1,
+    minNumbers: 1,
+    minSymbols: 1,
+    minUppercase: 1,
+  })
+  newPassword: string;
+}

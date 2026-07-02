@@ -8,4 +8,5 @@ export const EN: Record<string, string> = {
   'AUTH-007': 'Organization already selected',
   'AUTH-008': 'Refresh token not provided',
   'AUTH-009': 'Invalid refresh token',
+  'AUTH-010': 'Invalid reset password token',
 };

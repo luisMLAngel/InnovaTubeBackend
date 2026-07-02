@@ -4,7 +4,13 @@ import { Request, Response } from 'express';
 import { AppError } from 'src/common/error';
 import { PrismaService } from 'src/prisma';
 import { BcryptService } from '../../bcrypt/services/bcrypt.service';
-import { CreateAuthUserDto, LoginDto, ValidateUserResponseDto } from '../dtos';
+import {
+  CreateAuthUserDto,
+  LoginDto,
+  RequestForgotPasswordDto,
+  RequestResetPasswordDto,
+  ValidateUserResponseDto,
+} from '../dtos';
 import { AUTH_ERROR_CODES } from '../errors/auth.errors';
 import { JwtPayload } from '../interfaces';
 import { TokenService } from 'src/shared/services';
@@ -124,5 +130,51 @@ export class AuthService {
     );
 
     return { accessToken: newAccessToken, refreshToken: newRefreshToken };
+  }
+
+  async forgotPassword(data: RequestForgotPasswordDto) {
+    const { email } = data;
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      // No reveles si el email existe o no (buena práctica, aunque aquí regreses el token para otros casos)
+      return { resetToken: null };
+    }
+
+    const token = crypto.randomUUID();
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 30); // 30 min
+
+    await this.prisma.passwordResetToken.create({
+      data: { userId: user.id, token, expiresAt },
+    });
+
+    return { resetToken: token };
+  }
+
+  async resetPassword(
+    data: RequestResetPasswordDto,
+  ): Promise<{ success: boolean }> {
+    const { token, newPassword } = data;
+    const resetToken = await this.prisma.passwordResetToken.findUnique({
+      where: { token },
+    });
+
+    if (!resetToken || resetToken.used || resetToken.expiresAt < new Date()) {
+      throw new AppError(AUTH_ERROR_CODES.INVALID_OR_EXPIRED_RESET_TOKEN);
+    }
+
+    const passwordHash = await this.bcryptService.hash(newPassword);
+
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { id: resetToken.userId },
+        data: { passwordHash },
+      }),
+      this.prisma.passwordResetToken.update({
+        where: { id: resetToken.id },
+        data: { used: true },
+      }),
+    ]);
+    return { success: true };
   }
 }

@@ -10,7 +10,11 @@ import {
 import { AuthService } from '../services/auth.service';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { Request, Response } from 'express';
-import { CreateAuthUserDto } from '../dtos';
+import {
+  CreateAuthUserDto,
+  RequestForgotPasswordDto,
+  RequestResetPasswordDto,
+} from '../dtos';
 import { User } from 'src/generated/prisma/client';
 
 @Controller('auth')
@@ -38,5 +42,19 @@ export class AuthController {
   @Post('refresh-token')
   async refreshToken(@Req() req: Request): Promise<{ accessToken: string }> {
     return this.authService.refreshToken(req);
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(
+    @Body() body: RequestForgotPasswordDto,
+  ): Promise<{ resetToken: string }> {
+    return this.authService.forgotPassword(body);
+  }
+
+  @Post('reset-password')
+  async resetPassword(
+    @Body() body: RequestResetPasswordDto,
+  ): Promise<{ success: boolean }> {
+    return this.authService.resetPassword(body);
   }
 }

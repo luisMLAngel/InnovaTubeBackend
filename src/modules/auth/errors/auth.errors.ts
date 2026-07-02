@@ -15,6 +15,7 @@ export const AUTH_ERROR_CODES = {
   ORGANIZATION_ALREADY_SELECTED: 'AUTH-007',
   REFRESH_TOKEN_NOT_PROVIDED: 'AUTH-008',
   INVALID_REFRESH_TOKEN: 'AUTH-009',
+  INVALID_OR_EXPIRED_RESET_TOKEN: 'AUTH-010',
 } as const;
 
 export const AUTH_ERROR_DEFINITIONS: ErrorDomainDefinitions = {
@@ -62,6 +63,11 @@ export const AUTH_ERROR_DEFINITIONS: ErrorDomainDefinitions = {
     code: AUTH_ERROR_CODES.INVALID_REFRESH_TOKEN,
     statusCode: HttpStatus.UNAUTHORIZED,
     defaultMessage: 'Invalid refresh token',
+  },
+  [AUTH_ERROR_CODES.INVALID_OR_EXPIRED_RESET_TOKEN]: {
+    code: AUTH_ERROR_CODES.INVALID_OR_EXPIRED_RESET_TOKEN,
+    statusCode: HttpStatus.UNAUTHORIZED,
+    defaultMessage: 'Invalid reset password token',
   },
 };
 
