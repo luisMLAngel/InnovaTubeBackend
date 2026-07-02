@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./prisma:/usr/src/app/prisma
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npm run start:dev"

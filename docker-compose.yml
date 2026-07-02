@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: app-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: waflow
+      POSTGRES_PASSWORD: waflow123
+      POSTGRES_DB: app_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U waflow -d app_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    container_name: app-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - PORT=3000
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+
+volumes:
+  postgres_data:

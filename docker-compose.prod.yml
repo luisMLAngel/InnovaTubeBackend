@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      target: prod
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NODE_ENV=production
+    command: sh -c "npx prisma migrate deploy && node dist/main.js"
+    restart: unless-stopped
