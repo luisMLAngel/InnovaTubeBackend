@@ -37,5 +37,5 @@ lerna-debug.log*
 /generated/prisma
 
 # .env
-.env
+# .env
 /.continue
