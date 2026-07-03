@@ -22,6 +22,9 @@ if (!envParsed.success) {
   throw new Error('Invalid environment variables');
 }
 
+console.log('ALLOWED_ORIGINS raw:', process.env['ALLOWED_ORIGINS']);
+console.log('ALLOWED_ORIGINS parsed:', envParsed.data.ALLOWED_ORIGINS);
+
 export const envs: envType = {
   PORT: envParsed.data.PORT,
   ALLOWED_ORIGINS: envParsed.data.ALLOWED_ORIGINS,
