@@ -21,13 +21,9 @@ async function bootstrap() {
     origin: (origin, callback) => {
       const allowedOrigins = envs.ALLOWED_ORIGINS;
 
-      logger.log(`CORS - Origin received: "${origin}"`);
-      logger.log(`CORS - Allowed origins: ${JSON.stringify(allowedOrigins)}`);
-
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        logger.log(`CORS - BLOCKED origin: "${origin}"`);
         callback(null, false);
       }
     },
