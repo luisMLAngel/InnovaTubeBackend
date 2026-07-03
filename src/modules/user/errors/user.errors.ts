@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 import {
   ErrorDomainDefinitions,
   ErrorRegistration,
-} from 'src/common/error/interfaces';
+} from '../../../common/error/interfaces';
 import { EN, ES } from './translations';
 
 export const USER_ERROR_CODES = {

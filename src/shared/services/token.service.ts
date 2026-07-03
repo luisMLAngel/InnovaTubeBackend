@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { envs } from 'src/config';
-import { AppError } from 'src/common/error';
-import { JwtPayload } from 'src/modules/auth/interfaces';
-import { AUTH_ERROR_CODES } from 'src/modules/auth/errors/auth.errors';
+import { envs } from '../../config';
+import { AppError } from '../../common/error';
+import { JwtPayload } from '../../modules/auth/interfaces';
+import { AUTH_ERROR_CODES } from '../../modules/auth/errors/auth.errors';
 
 @Injectable()
 export class TokenService {

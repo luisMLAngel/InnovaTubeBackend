@@ -15,7 +15,7 @@ import {
   RequestForgotPasswordDto,
   RequestResetPasswordDto,
 } from '../dtos';
-import { User } from 'src/generated/prisma/client';
+import { User } from '../../../generated/prisma/client';
 
 @Controller('auth')
 export class AuthController {

@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from '../services';
 import { CreateUserDto } from '../dtos';
-import { User } from 'src/generated/prisma/client';
+import { User } from '../../../generated/prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Favorite, Video } from 'src/generated/prisma/client';
-import { PrismaService } from 'src/prisma';
+import { Favorite, Video } from '../../../generated/prisma/client';
+import { PrismaService } from '../../../prisma';
 import { CreateFavoriteDto } from '../dtos';
 
 @Injectable()

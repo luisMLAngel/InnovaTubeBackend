@@ -1,8 +1,8 @@
 import { Module, OnModuleInit } from '@nestjs/common';
-import { errorRegistry } from 'src/common/error';
+import { errorRegistry } from '../../common/error';
 import { VIDEO_ERRORS } from './errors/video.errors';
 import { VideoService } from './services';
-import { PrismaService } from 'src/prisma';
+import { PrismaService } from '../../prisma';
 import { VideoController } from './controllers/video.controller';
 
 @Module({

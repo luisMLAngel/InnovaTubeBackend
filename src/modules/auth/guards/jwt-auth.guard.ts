@@ -1,6 +1,6 @@
 import { AuthGuard } from '@nestjs/passport';
 import { ExecutionContext, Injectable } from '@nestjs/common';
-import { AppError } from 'src/common/error';
+import { AppError } from '../../../common/error';
 import { AUTH_ERROR_CODES } from '../errors/auth.errors';
 
 @Injectable()

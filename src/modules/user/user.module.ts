@@ -1,9 +1,9 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { UserService } from './services';
 import { UserController } from './controllers';
-import { PrismaService } from 'src/prisma';
+import { PrismaService } from '../../prisma';
 import { BcryptModule } from '../bcrypt/bcrypt.module';
-import { errorRegistry } from 'src/common/error';
+import { errorRegistry } from '../../common/error';
 import { USER_ERRORS } from './errors/user.errors';
 
 @Module({

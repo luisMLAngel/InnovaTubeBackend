@@ -1,7 +1,7 @@
 import { Module, OnModuleInit } from '@nestjs/common';
-import { errorRegistry } from 'src/common/error';
+import { errorRegistry } from '../../common/error';
 import { FAVORITE_ERRORS } from './errors/favorite.errors';
-import { PrismaService } from 'src/prisma';
+import { PrismaService } from '../../prisma';
 import { FavoriteService } from './services';
 import { FavoriteController } from './controllers/favorite.controller';
 

@@ -10,9 +10,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateFavoriteDto } from '../dtos';
-import { Favorite } from 'src/generated/prisma/client';
+import { Favorite } from '../../../generated/prisma/client';
 import { FavoriteService } from '../services';
-import { JwtAuthGuard } from 'src/modules/auth/guards';
+import { JwtAuthGuard } from '../../auth/guards';
 
 @Controller('favorites')
 export class FavoriteController {

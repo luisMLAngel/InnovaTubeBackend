@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
-import { AppError } from 'src/common/error';
-import { PrismaService } from 'src/prisma';
+import { AppError } from '../../../common/error';
+import { PrismaService } from '../../../prisma';
 import { BcryptService } from '../../bcrypt/services/bcrypt.service';
 import {
   CreateAuthUserDto,
@@ -13,9 +13,9 @@ import {
 } from '../dtos';
 import { AUTH_ERROR_CODES } from '../errors/auth.errors';
 import { JwtPayload } from '../interfaces';
-import { TokenService } from 'src/shared/services';
-import { User } from 'src/generated/prisma/client';
-import { UserService } from 'src/modules/user/services';
+import { TokenService } from '../../../shared/services';
+import { User } from '../../../generated/prisma/client';
+import { UserService } from '../../user/services';
 
 @Injectable()
 export class AuthService {
