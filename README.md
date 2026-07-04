@@ -37,7 +37,7 @@ El sistema usa **JWT (JSON Web Tokens)** con dos tipos de tokens:
 
 ### Flujo de autenticacion
 
-1. **Registro:** El usuario envia email, contrasena, nombre y un `recaptchaToken`. Se valida el captcha, se hashea la contrasena con bcrypt y se crean ambos tokens.
+1. **Registro:** El usuario envia email, contraseña, nombre y un `recaptchaToken`. Se valida el captcha, se hashea la contraseña con bcrypt y se crean ambos tokens.
 2. **Login:** Se validan credenciales y se retornan access y refresh tokens.
 3. **Refresh:** Se envia el refresh token y se retornan nuevos tokens.
 
@@ -80,10 +80,10 @@ npx prisma migrate deploy
 
 ### Modelos
 
-- **User:** Usuarios con email unico y contrasena hasheada.
+- **User:** Usuarios con email unico y contraseña hasheada.
 - **Video:** Videos de YouTube con metadatos.
 - **Favorite:** Relacion usuario-video para favoritos (unica por usuario).
-- **PasswordResetToken:** Tokens temporales para recuperacion de contrasena.
+- **PasswordResetToken:** Tokens temporales para recuperacion de contraseña.
 
 ## Instalacion y ejecucion
 
