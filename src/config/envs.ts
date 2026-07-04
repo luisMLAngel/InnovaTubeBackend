@@ -10,6 +10,7 @@ export const envSchema = z.object({
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required.'),
   JWT_SECRET: z.string().min(1, 'JWT_SECRET is required.'),
   JWT_REFRESH_SECRET: z.string().min(1, 'JWT_REFRESH_SECRET is required.'),
+  RECAPTCHA_SECRET_KEY: z.string().min(1, 'RECAPTCHA_SECRET_KEY'),
   NODE_ENV: z.string().nonempty('NODE_ENV is required.'),
 });
 
@@ -28,5 +29,6 @@ export const envs: envType = {
   DATABASE_URL: envParsed.data.DATABASE_URL,
   JWT_SECRET: envParsed.data.JWT_SECRET,
   JWT_REFRESH_SECRET: envParsed.data.JWT_REFRESH_SECRET,
+  RECAPTCHA_SECRET_KEY: envParsed.data.RECAPTCHA_SECRET_KEY,
   NODE_ENV: envParsed.data.NODE_ENV,
 };

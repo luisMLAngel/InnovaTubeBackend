@@ -9,4 +9,5 @@ export const ES: Record<string, string> = {
   'AUTH-008': 'Token de actualización no proporcionado',
   'AUTH-009': 'Token de actualización inválido',
   'AUTH-010': 'Token de cambio de contraseña inválido',
+  'AUTH-011': 'La validación del captcha ha fallado',
 };

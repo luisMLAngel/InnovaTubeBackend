@@ -49,6 +49,10 @@ export class CreateAuthUserDto {
     minUppercase: 1,
   })
   password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  recaptchaToken: string;
 }
 
 export class RequestForgotPasswordDto {

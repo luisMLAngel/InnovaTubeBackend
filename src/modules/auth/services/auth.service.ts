@@ -16,6 +16,7 @@ import { JwtPayload } from '../interfaces';
 import { TokenService } from '../../../shared/services';
 import { User } from '../../../generated/prisma/client';
 import { UserService } from '../../user/services';
+import { RecaptchaService } from './recaptcha.service';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +26,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly tokenService: TokenService,
     private readonly userService: UserService,
+    private readonly recaptchaService: RecaptchaService,
   ) {}
 
   async validateUser({
@@ -85,8 +87,19 @@ export class AuthService {
     res: Response,
     data: CreateAuthUserDto,
   ): Promise<{ accessToken: string; refreshToken: string; user: User }> {
-    const { firstName, lastName, email, password } = data;
+    const { firstName, lastName, email, password, recaptchaToken } = data;
     await this.validateEmailUniqueness(data.email);
+
+    // verificar el captcha version 3
+    const isValidRecaptcha: boolean = await this.recaptchaService.verify(
+      recaptchaToken,
+      'register',
+    );
+
+    if (!isValidRecaptcha) {
+      throw new AppError(AUTH_ERROR_CODES.RECAPTCHA_VALIDATION_ERROR);
+    }
+
     const passwordHash = await this.bcryptService.hash(password);
     const user = await this.prisma.user.create({
       data: { firstName, lastName, email, passwordHash },

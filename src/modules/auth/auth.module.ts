@@ -11,6 +11,7 @@ import { errorRegistry } from '../../common/error';
 import { AUTH_ERRORS } from './errors/auth.errors';
 import { TokenService } from '../../shared/services';
 import { UserService } from '../user/services';
+import { RecaptchaService } from './services/recaptcha.service';
 
 @Module({
   providers: [
@@ -20,6 +21,7 @@ import { UserService } from '../user/services';
     LocalStrategy,
     TokenService,
     UserService,
+    RecaptchaService,
   ],
   imports: [
     BcryptModule,

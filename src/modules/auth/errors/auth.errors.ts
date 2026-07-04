@@ -16,6 +16,7 @@ export const AUTH_ERROR_CODES = {
   REFRESH_TOKEN_NOT_PROVIDED: 'AUTH-008',
   INVALID_REFRESH_TOKEN: 'AUTH-009',
   INVALID_OR_EXPIRED_RESET_TOKEN: 'AUTH-010',
+  RECAPTCHA_VALIDATION_ERROR: 'AUTH-011',
 } as const;
 
 export const AUTH_ERROR_DEFINITIONS: ErrorDomainDefinitions = {
@@ -68,6 +69,11 @@ export const AUTH_ERROR_DEFINITIONS: ErrorDomainDefinitions = {
     code: AUTH_ERROR_CODES.INVALID_OR_EXPIRED_RESET_TOKEN,
     statusCode: HttpStatus.UNAUTHORIZED,
     defaultMessage: 'Invalid reset password token',
+  },
+  [AUTH_ERROR_CODES.RECAPTCHA_VALIDATION_ERROR]: {
+    code: AUTH_ERROR_CODES.RECAPTCHA_VALIDATION_ERROR,
+    statusCode: HttpStatus.UNAUTHORIZED,
+    defaultMessage: 'Invalid recaptch validation',
   },
 };
 
